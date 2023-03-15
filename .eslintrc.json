@@ -1,0 +1,27 @@
+{
+  "plugins": [
+      "react",
+      "@typescript-eslint"
+  ],
+  "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react/jsx-runtime",
+      "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+     "react/no-set-state": "off"
+  },
+  "settings": {
+    "react": {
+        "version": "detect"
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  }
+}
