@@ -1,10 +1,14 @@
 import { useState } from "react";
 import PigImage from "./pigimage";
+import pigscores from "./pigscores";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const roll1 = Math.floor(Math.random() * 5);
-  const roll2 = Math.floor(Math.random() * 5);
+  const [total, setTotal] = useState(0);
+  const roll1 = Math.floor(Math.random() * (pigscores.length - 1));
+  const roll2 = Math.floor(Math.random() * (pigscores.length - 1));
+
+  const score = pigscores[roll1].score + pigscores[roll2].score;
+
   return (
     <div className="App">
       <nav id="header" className="w-full z-30 top-0 text-white py-1 lg:py-6">
@@ -42,41 +46,15 @@ function App() {
           </div>
 
           <div
-            className="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20"
+            className="w-full lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20"
             id="nav-content"
           >
-            <ul className="list-reset lg:flex justify-end flex-1 items-center">
-              <li className="mr-3">
-                <a
-                  className="inline-block py-2 px-4 text-black font-bold no-underline"
-                  href="#"
-                >
-                  Active
-                </a>
-              </li>
-              <li className="mr-3">
-                <a
-                  className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
-                  href="#"
-                >
-                  link
-                </a>
-              </li>
-              <li className="mr-3">
-                <a
-                  className="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
-                  href="#"
-                >
-                  link
-                </a>
-              </li>
-            </ul>
-            <button
+            <a href="https://github.com/technion/pigslmao"><button
               id="navAction"
               className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
             >
-              Action
-            </button>
+              Source on Github
+            </button></a>
           </div>
         </div>
       </nav>
@@ -87,11 +65,15 @@ function App() {
             Play Pigs LMAO
           </h1>
           <p className="leading-normal text-gray-800 text-base md:text-xl lg:text-2xl mb-8">
-            You have rolled two pigs.
+            A totally original game,
           </p>
 
-          <button className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48" onClick={() => setCount((count) => count + 1)}>
+          <button className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48" onClick={() => setTotal((prevtotal) => prevtotal + score)}>
             Roll Again
+          </button>
+          <button className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48" onClick={() => setTotal((prevtotal) => prevtotal + score)}>
+            This score: {score}<br />
+            Total score: {total+score}
           </button>
         </div>
 
@@ -105,11 +87,6 @@ function App() {
         </div>
       </section>
         </div>
-      </div>
-
-      <div className="card">
-          Roll count is {count}
-
       </div>
     </div>
   );
