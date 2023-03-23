@@ -4,10 +4,10 @@ import pigscores from "./pigscores";
 
 function App() {
   const [total, setTotal] = useState(0);
-  const roll1 = Math.floor(Math.random() * (pigscores.length - 1));
-  const roll2 = Math.floor(Math.random() * (pigscores.length - 1));
+  const roll1 = Math.floor(Math.random() * (pigscores.length));
+  const roll2 = Math.floor(Math.random() * (pigscores.length));
 
-  const score = pigscores[roll1].score + pigscores[roll2].score;
+  const score = (roll1 == roll2 ) ? pigscores[roll1].double : pigscores[roll1].score + pigscores[roll2].score;
 
   return (
     <div className="App">
@@ -49,12 +49,14 @@ function App() {
             className="w-full lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 text-black p-4 lg:p-0 z-20"
             id="nav-content"
           >
-            <a href="https://github.com/technion/pigslmao"><button
-              id="navAction"
-              className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
-            >
-              Source on Github
-            </button></a>
+            <a href="https://github.com/technion/pigslmao">
+              <button
+                id="navAction"
+                className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded mt-4 lg:mt-0 py-4 px-8 shadow opacity-75"
+              >
+                Source on Github
+              </button>
+            </a>
           </div>
         </div>
       </nav>
@@ -68,24 +70,31 @@ function App() {
             A totally original game,
           </p>
 
-          <button className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48" onClick={() => setTotal((prevtotal) => prevtotal + score)}>
+          <button
+            className="mx-auto lg:mx-8 hover:underline text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48 bg-sky-500"
+            onClick={() => setTotal((prevtotal) => prevtotal + score)}
+          >
             Roll Again
           </button>
-          <button className="mx-auto lg:mx-0 hover:underline text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48" onClick={() => setTotal((prevtotal) => prevtotal + score)}>
-            This score: {score}<br />
-            Total score: {total+score}
+          <button
+            className="mx-auto lg:mx-8 hover:underline text-gray-800 font-extrabold rounded my-2 md:my-6 py-4 px-8 shadow-lg w-48 bg-emerald-300"
+            onClick={() => setTotal((prevtotal) => prevtotal + score)}
+          >
+            This score: {score}
+            <br />
+            Total score: {total + score}
           </button>
         </div>
 
         <div className="items-center w-full mx-auto content-end">
           <section>
-        <div className="relative items-center w-full py-12 mx-auto md:px-12 lg:px-16 max-w-7xl">
-          <div className="grid grid-cols-1 gap-12 text-center lg:gap-24 lg:grid-cols-2">
-            <PigImage index={roll1} />
-            <PigImage index={roll2} />
-          </div>
-        </div>
-      </section>
+            <div className="relative items-center w-full py-12 mx-auto md:px-12 lg:px-16 max-w-7xl">
+              <div className="grid grid-cols-1 gap-12 text-center lg:gap-24 lg:grid-cols-2">
+                <PigImage index={roll1} />
+                <PigImage index={roll2} />
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
