@@ -1,9 +1,9 @@
 
-import leaningjowler from "./assets/leaningjowler.jpg";
-import razorback from "./assets/razorback.jpg";
-import trotter from "./assets/trotter.jpg";
-import snouter from "./assets/snouter.jpg";
-import sider from "./assets/sider.jpg";
+import leaningjowler from "./assets/leaningjowler.png";
+import razorback from "./assets/razorback.png";
+import trotter from "./assets/trotter.png";
+import snouter from "./assets/snouter.png";
+import sider from "./assets/sider.png";
 
 type PigScore = {
   name: string;
