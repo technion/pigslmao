@@ -6,37 +6,37 @@ import getRandomDice from "./randomNumber";
 function App() {
   const [total, setTotal] = useState(0);
 
-  // Total of all probabilities is 70
-  const roll1 = 1 + getRandomDice(70);
+  // Total of all probabilities is 71. As our algorithm starts at 1 instead of 0 we counter this by setting max to 70.
+  let roll1 = 1 + getRandomDice(70);
   let roll2 = 1 + getRandomDice(70);
   let pig1: PigScore = pigscores[0]; //Force an initial random assignment to deal with type errors around undefined type
   let pig2: PigScore = pigscores[0];
 
   // Special case: Piggy back is always a double
-  if(roll1 === 1) {
-    roll2 = 1;
+  if (roll1 === 1 || roll2 === 1) {
+    roll1 = roll2 = 1;
   }
 
   let acc = 0;
 
-  for(const pig of pigscores) {
-    if (( pig.probability + acc) >= roll1) {
+  for (const pig of pigscores) {
+    if (pig.probability + acc >= roll1) {
       pig1 = pig;
       break;
     }
     acc += pig.probability;
   }
 
-  acc = 0
-  for(const pig of pigscores) {
-    if (( pig.probability + acc) >= roll2) {
+  acc = 0;
+  for (const pig of pigscores) {
+    if (pig.probability + acc >= roll2) {
       pig2 = pig;
       break;
     }
     acc += pig.probability;
   }
 
-  const score = (roll1 == roll2 ) ? pig1.double : pig1.score + pig2.score;
+  const score = roll1 == roll2 ? pig1.double : pig1.score + pig2.score;
 
   return (
     <div className="App">

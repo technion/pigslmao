@@ -1,5 +1,5 @@
 const getRandomDice = (max: number): number => {
-  // Cryptographically random number between 0 and max
+  // Cryptographically random number between 0 and max inclusive
   // https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues
   // https://stackoverflow.com/questions/2509679/how-to-generate-a-random-integer-number-from-within-a-range
   // Design Requirements: Avoid floating point
