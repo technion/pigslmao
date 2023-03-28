@@ -1,11 +1,12 @@
 import { useState } from "react";
 import PigImage from "./pigimage";
 import pigscores from "./pigscores";
+import getRandomDice from "./randomNumber";
 
 function App() {
   const [total, setTotal] = useState(0);
-  const roll1 = Math.floor(Math.random() * (pigscores.length));
-  const roll2 = Math.floor(Math.random() * (pigscores.length));
+  const roll1 = getRandomDice(pigscores.length-1);
+  const roll2 = getRandomDice(pigscores.length-1);
 
   const score = (roll1 == roll2 ) ? pigscores[roll1].double : pigscores[roll1].score + pigscores[roll2].score;
 
