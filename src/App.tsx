@@ -1,14 +1,42 @@
 import { useState } from "react";
 import PigImage from "./pigimage";
-import pigscores from "./pigscores";
+import pigscores, {PigScore} from "./pigscores";
 import getRandomDice from "./randomNumber";
 
 function App() {
   const [total, setTotal] = useState(0);
-  const roll1 = getRandomDice(pigscores.length-1);
-  const roll2 = getRandomDice(pigscores.length-1);
 
-  const score = (roll1 == roll2 ) ? pigscores[roll1].double : pigscores[roll1].score + pigscores[roll2].score;
+  // Total of all probabilities is 70
+  const roll1 = 1 + getRandomDice(70);
+  let roll2 = 1 + getRandomDice(70);
+  let pig1: PigScore = pigscores[0]; //Force an initial random assignment to deal with type errors around undefined type
+  let pig2: PigScore = pigscores[0];
+
+  // Special case: Piggy back is always a double
+  if(roll1 === 1) {
+    roll2 = 1;
+  }
+
+  let acc = 0;
+
+  for(const pig of pigscores) {
+    if (( pig.probability + acc) >= roll1) {
+      pig1 = pig;
+      break;
+    }
+    acc += pig.probability;
+  }
+
+  acc = 0
+  for(const pig of pigscores) {
+    if (( pig.probability + acc) >= roll2) {
+      pig2 = pig;
+      break;
+    }
+    acc += pig.probability;
+  }
+
+  const score = (roll1 == roll2 ) ? pig1.double : pig1.score + pig2.score;
 
   return (
     <div className="App">
@@ -91,8 +119,8 @@ function App() {
           <section>
             <div className="relative items-center w-full py-12 mx-auto md:px-12 lg:px-16 max-w-7xl">
               <div className="grid grid-cols-1 gap-12 text-center lg:gap-24 lg:grid-cols-2">
-                <PigImage index={roll1} />
-                <PigImage index={roll2} />
+                <PigImage {...pig1} />
+                <PigImage {...pig2} />
               </div>
             </div>
           </section>
