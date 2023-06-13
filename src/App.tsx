@@ -96,7 +96,7 @@ function App() {
             Play Pigs LMAO
           </h1>
           <p className="leading-normal text-gray-800 text-base md:text-xl lg:text-2xl mb-8">
-            A totally original game,
+            A totally original game!
           </p>
 
           <button
